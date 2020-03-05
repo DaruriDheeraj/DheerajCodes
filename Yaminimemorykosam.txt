@@ -1,0 +1,24 @@
+n=5
+k=2*n-1
+p=1
+y=k+2
+for i in range(n):
+    for j in range(k):
+        print (end=" ")
+    k=k+1
+    if(p==1 and i!=n-1):
+        print("$",end=" ")
+    for r in range(y):
+        print(end=" ")
+    y=y-3
+    if(p==1):
+            print("$",end=" ")
+    print("\r")
+k=k-3
+for i in range(n):
+    for h in range(k):
+       print(end=" ")
+    k=k-3
+    if(p==1):
+        print("$",end=" ")
+    print("\r")
