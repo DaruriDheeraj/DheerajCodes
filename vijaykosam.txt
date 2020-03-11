@@ -1,0 +1,18 @@
+n=20
+l=1
+p=n+(n-1)
+for i in range(n):
+    for j in range(l):
+        print(end=" ")
+    l=l+1
+    print('*',end=" ")
+    for k in range(p):
+        print(end=" ")
+    p=p-2
+    print('*',end=" ")
+    print()
+    if(i+1==n):
+        for l in range(l):
+            print(end=" ")
+        print(end="")
+        print('*')
