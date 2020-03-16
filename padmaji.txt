@@ -1,0 +1,22 @@
+n=20
+p=1
+l=n-3
+for i in range(n):
+    if(i<=int(n/2)-1):
+        if i==0:
+            for i in range(int(n/2)):
+                print('*',end=" ")
+        elif(i==int(n/2)-1):
+            for i in range(int(n/2)):
+                print('*',end=" ")
+        elif(i<=int(n/2)-1 and i>0):
+            print('*',end=" ")
+            for i in range(l):
+                print(end=" ")
+            if(i==(int(n/2)-2)):
+                l=l-2
+            for i in range(p):
+                print('*',end=" ")
+    else:
+        print('*',end=" ")
+    print()
