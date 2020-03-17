@@ -1,0 +1,54 @@
+n=10
+l=2
+p=int(n/2)
+k=p
+co=0
+coo=0
+for i in range(n):
+        if(i==0):
+            for i in range(p):
+                print(end=" ")
+            for j in range(l+1):
+                print('*',end=" ")
+            p=p-1
+        elif(i<=(k-2) and i>0):
+            for j in range(p):
+                print(end=" ")
+            print('*',end=" ")
+            for t in range(p+2):
+                print(end=" ")
+            if(i>=2 and i<=(k-2)):
+                    if(co<1):
+                        for d in range(l+1):
+                            print('*',end=" ")
+                       # print('*',end=" ")
+                    else:
+                        for ddd in range(l-1):
+                            print(end=" ")
+                        print('*',end=" ")
+                        for dd in range(l-1):
+                            print(end=" ")
+                        for jj in range(l-1):
+                            print('*',end=" ")
+                    co=co+1
+        elif(i==k-1):
+            for i in range(p+1):
+                print(end=" ")
+            for j in range(l+1):
+                print('*',end=" ")
+            for r in range(p-3):
+                print(end=" ")
+            for rr in range(l-1):
+                print('*',end=" ")
+            for rrr in range(p-2):
+                print(end=" ")
+            for ttt in range(l-1):
+                print('*',end=" ")
+            
+        else:
+            for po in range(n+6):
+                print(end=" ")
+            if(coo<1):
+                print('*',end=" ")
+            coo=coo+1
+        print()
