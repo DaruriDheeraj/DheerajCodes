@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=ParkCarDetails
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ ParkCarDetails\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=void\ AddDetails()
+comment10.params=Carregnum1
+comment10.target=boolean\ SearchCarbyID(java.lang.String)
+comment2.params=
+comment2.target=void\ deleteSlot()
+comment3.params=
+comment3.target=void\ display()
+comment3.text=Displaying\ the\ Details\ Parking\ Slot,\ Car\ Registration\ number\ and\ Staff
+comment4.params=Slotnumber
+comment4.target=boolean\ searchSlot(java.lang.String)
+comment4.text=Checks\ whether\ the\ slot\ is\ present\ or\ not
+comment5.params=
+comment5.target=boolean\ SearchCar()
+comment6.params=carregistration1
+comment6.target=void\ AddCarDetailsinslot(java.lang.String)
+comment6.text=boolean\ SearchParkingSlot(String\ SlotID)\ {\r\n\tif(ParkingSlotID.equals(SlotID))\ {\r\n\t\ \ \ return\ true;\r\n\t}\r\n\telse\ {\r\n\t\treturn\ false;\r\n}\r\n}
+comment7.params=
+comment7.target=boolean\ FindEmptySlots()
+comment8.params=carreg1
+comment8.target=void\ deleteCar(java.lang.String)
+comment9.params=carreg
+comment9.target=boolean\ FindCar(java.lang.String)
+numComments=11
