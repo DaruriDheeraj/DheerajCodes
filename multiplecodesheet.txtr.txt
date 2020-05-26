@@ -1,0 +1,29 @@
+>>> import matplotlib.pyplot as plt
+>>> df=pd.read_excel('Sample.xlsx',sheet_name=None)
+>>> df
+OrderedDict([('Sheet1',    A   B  C  D
+0  0   1  2  3
+1  1   2  8  4
+2  2   5  9  5
+3  3   6  2  6
+4  4  13  3  7), ('Sheet2',    A   B  C  D
+0  0   1  2  3
+1  1   2  8  4
+2  2  15  9  5
+3  3  16  2  6
+4  4  13  3  7)])
+>>> for sheet_name,df in df.items():
+...     df.plot(title=sheet_name)
+...
+<matplotlib.axes._subplots.AxesSubplot object at 0x0000026D75A6DA48>
+<matplotlib.axes._subplots.AxesSubplot object at 0x0000026D780D2D08>
+>>> plt.show()
+>>>                                                                                                                                                                                                                                                                                                                                                                     
+
+
+
+
+
+
+
+
