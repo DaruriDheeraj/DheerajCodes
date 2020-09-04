@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <style>
+  body {
+  margin: 0;
+  background: #020202;
+  }
+h1 {
+  position: absolute;
+  top: 45%;
+  left: 47%;
+  transform: translate(-50%, -50%);
+  font-size: 300%;
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+<h1>
+<svg width="300%">
+ <path id="path">
+		<animate attributeName="d" from="m0,110 h0" to="m0,110 h1100" dur="4.0s" begin="0s" repeatCount="indefinite"/>
+	</path>
+	<text font-size="65" font-family="Source Sans Pro" fill='hsl(0, 100%, 100%)'>
+		<textPath xlink:href="#path">Happy Birthday Akhil
+		</textPath>
+	</text>
+</svg>
+</h1>
+<!--img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQXGbDbhpsbsWbOLGWQ4YHJnzbDe1mF1Z9VFg&usqp=CAU" width="300" height="260"-->
+<canvas position="center" id="birthday">
+<img id="scream" src="https://ak.picdn.net/shutterstock/videos/1015886059/thumb/1.jpg">
+</canvas>
+<!-- partial -->
+  <script>
+  // helper functions
+var PI2 = Math.PI * 2
+var random = (function(min, max) {
+return Math.random() * (max - min + 1) + min
+})
+var timestamp=(function() {
+return new Date().getTime()
+})
+// container
+class Birthday {
+  constructor() {
+
+    this.resize()
+
+    // create a lovely place to store the firework
+    this.fireworks = []
+    this.counter = 0
+
+  }
+  resize() {
+  if ( navigator.platform != "iPad" && navigator.platform != "iPhone" && navigator.platform != "iPod" ) {  
+			this.width = canvas.width = window.innerWidth
+			this.height = canvas.height = window.innerHeight
+            //I'll use window.innerWidth in production
+	    } else {
+		    this.width = canvas.width = screen.width;
+			this.height = canvas.height = screen.width; 
+	    }
+		    var center = this.width / 2
+    this.spawnA = center - center / 2
+    this.spawnB = center + center / 2
+    this.spawnC = this.height * .2
+    this.spawnD = this.height * .3
+  }
+  
+  update(delta) {
+ //   ctx.globalCompositeOperation = 'hard-light'
+    ctx.fillStyle = `rgba(60,60,60,${ 7 * delta })`
+    ctx.fillRect(0, 0, this.width, this.height)
+    ctx.globalCompositeOperation = 'light'
+    for (var firework of this.fireworks) firework.update(delta)
+
+    // if enough time passed... create new new firework
+    this.counter += delta * 3 // each second
+    if (this.counter >= 1) {
+      this.fireworks.push(new Firework(
+        random(this.spawnA, this.spawnB),
+        this.height,
+        random(0, this.width),
+        random(this.spawnC, this.spawnD),
+        random(0, 200),
+        random(30,200)))
+      this.counter = 0
+    }
+    // remove the dead fireworks
+    if (this.fireworks.length > 800) this.fireworks = this.fireworks.filter(firework => !firework.dead)
+
+  }
+}
+
+class Firework {
+  constructor(x, y, targetX, targetY, shade, offsprings) {
+  
+    this.dead = false
+    this.offsprings = offsprings
+
+    this.x = x
+    this.y = y
+    this.targetX = targetX
+    this.targetY = targetY
+
+    this.shade = shade
+    this.history = []
+  }
+  update(delta) {
+    if (this.dead) return
+    var xDiff = this.targetX - this.x
+    var yDiff = this.targetY - this.y
+    if (Math.abs(xDiff) > 3 || Math.abs(yDiff) > 3) { // is still moving
+      this.x += xDiff * 2 * delta
+      this.y += yDiff * 2 * delta
+
+      this.history.push({
+        x: this.x,
+        y: this.y
+      })
+
+     // if (this.history.length > 20) this.history.shift()
+	 
+
+    } else {
+      if (this.offsprings && !this.madeChilds) {
+        
+        var b = this.offsprings / 2
+        for (var i = 0; i < b; i++) {
+          var targetX = this.x + this.offsprings * Math.cos(PI2 * i / b)
+          var targetY = this.y + this.offsprings * Math.sin(PI2 * i / b)
+
+          birthday.fireworks.push(new Firework(this.x, this.y, targetX, targetY, this.shade, 0))
+
+        }
+
+      }
+      this.madeChilds = true
+     this.history.shift()
+    }
+    
+    if (this.history.length === 0) this.dead = true
+	else if (this.offsprings) { 
+        for (let i = 0; this.history.length > i; i++) {
+          let point = this.history[i]
+          ctx.beginPath()
+          ctx.fillStyle = 'hsl(' + this.shade + ',50%,' + i + '%)'
+          ctx.arc(point.x, point.y, 2, 0, PI2, false)
+          ctx.fill()
+        } 
+      } 
+    else {
+      ctx.beginPath()
+      ctx.fillStyle = 'hsl(' + this.shade + ',100%,50%)'
+      ctx.arc(this.x, this.y, 1, 0, PI2, false)
+      ctx.fill()
+    }
+
+  }
+}
+
+var canvas = document.getElementById('birthday')
+var ctx = canvas.getContext('2d')
+var then = timestamp()
+
+var birthday = new Birthday
+//window.onresize = () => birthday.resize()
+
+  ;(function loop(){
+  
+  	requestAnimationFrame(loop)
+	
+
+  	var now = timestamp()
+  	var delta = now - then
+
+    then = now
+	var img = document.getElementById("scream");
+   ctx.drawImage(img, 10, 10,1300,600);
+    birthday.update(delta / 800)
+	
+  	
+
+  })()</script>
+</body>
+</html>
